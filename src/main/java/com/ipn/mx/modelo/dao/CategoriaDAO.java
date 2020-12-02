@@ -23,7 +23,7 @@ public class CategoriaDAO {
 
     private static final String SQL_INSERT = "insert into Categoria (nombreCategoria, descripcionCategoria) values(?,?)";
     private static final String SQL_UPDATE = "update Categoria set nombreCategoria=?, descripcionCategoria=? where idCategoria=?";
-    private static final String SQL_DELETE = "{call spBorrarCategoria(?)}";
+    private static final String SQL_DELETE = "delete from Categoria where idCategoria=?";
     private static final String SQL_SELECT = "select * from Categoria where idCategoria=?";
     private static final String SQL_SELECT_ALL = "select * from Categoria";
     private Connection con;
