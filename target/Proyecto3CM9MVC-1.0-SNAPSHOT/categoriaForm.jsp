@@ -12,6 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Categoria form</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+        
     </head>
     <body>
         <div class="container">
@@ -28,7 +29,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link active" href="index.jsp">Home <span class="sr-only">(current)</span></a>
                         <a class="nav-link" href="CategoriaServlet?accion=listaDeCategorias">Lista de categorias</a>
                         <a class="nav-link" href="CategoriaServlet?accion=nuevo">Registrar categoria</a>
                     </div>
@@ -45,7 +46,7 @@
                     id="frmCategoriaForm"
                     > 
                     <input type="hidden" name="id" id="id"
-                           value="<c:out value="${dto.entidad.idCategoria}" />"/>
+                           value="<c:out value="${dto.entidad.idCategoria}"/>"/>
                     <div class="form-group row">
                         <div class="col-sm-6">
                             <label class="col-sm-2 col-form-label">Nombre</label>
@@ -67,7 +68,7 @@
                                    maxlenght="150" required="required"
                                    placeholder="descripcion de la categoria"
                                    class="form-control"
-                                   value="< c:out value="${dto.entidad.descripcionCategoria}"/>"/>
+                                   value="<c:out value="${dto.entidad.descripcionCategoria}"/>"/>
                         </div>
                     </div>
                     <div class="form-group row">

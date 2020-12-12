@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Principal</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="estilos.css">
     </head>
     <body>
         <div class="container">
@@ -27,9 +28,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link active" href="index.jsp">Home <span class="sr-only">(current)</span></a>
                         <a class="nav-link" href="CategoriaServlet?accion=listaDeCategorias">Lista de categorias</a>
-
+                        <a class="nav-link" href="ProductoServlet?accion=listaDeProductos">Lista de productos</a>
+                         <a class="nav-link" href="CategoriaServlet?accion=verPDF" target="_blank">Reporte</a>
+                         <a class="nav-link" href="CategoriaServlet?accion=graficar" target="_blank">Grafica</a>
                     </div>
                 </div>
             </nav>

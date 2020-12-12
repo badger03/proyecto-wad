@@ -6,19 +6,31 @@
 package com.ipn.mx.controlador.web;
 
 import com.ipn.mx.modelo.dao.CategoriaDAO;
+import com.ipn.mx.modelo.dao.GraficaDAO;
 import com.ipn.mx.modelo.dto.CategoriaDTO;
+import com.ipn.mx.modelo.dto.GraficaDTO;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperRunManager;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtils;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
 
 /**
  *
@@ -58,6 +70,14 @@ public class CategoriaServlet extends HttpServlet {
                         } else {
                             if (accion.equals("ver")) {
                                 mostrarCategoria(request, response);
+                            }else{
+                                if(accion.equals("graficar")){
+                                    graficar(request,response);
+                                }else{
+                                    if(accion.equals("verPDF")){
+                                        verPDF(request,response);
+                                    }
+                                }
                             }
                         }
                     }
@@ -155,8 +175,28 @@ public class CategoriaServlet extends HttpServlet {
     }
 
     private void almacenarCategoria(HttpServletRequest request, HttpServletResponse response) {
-      
+       CategoriaDAO dao = new CategoriaDAO();
+        CategoriaDTO dto = new CategoriaDTO();
+
+        // Atributos en común
+        dto.getEntidad().setNombreCategoria(request.getParameter("txtNombre"));
+        dto.getEntidad().setDescripcionCategoria(request.getParameter("txtDescripcion"));
+
+        try {
+            if (request.getParameter("id") == null || request.getParameter("id").isEmpty()) { // Nuevo elemento
+                dao.create(dto);
+                listaDeCategorias(request, response);
+            } else { // actualizacion
+                dto.getEntidad().setIdCategoria(Integer.parseInt(request.getParameter("id")));
+                dao.update(dto);
+                listaDeCategorias(request, response);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+
+    
 
     private void mostrarCategoria(HttpServletRequest request, HttpServletResponse response) {
         CategoriaDAO dao = new CategoriaDAO();
@@ -168,6 +208,50 @@ public class CategoriaServlet extends HttpServlet {
             request.setAttribute("cat", dto);
             rd.forward(request, response);
         } catch (SQLException | ServletException | IOException ex) {
+            Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void graficar(HttpServletRequest request, HttpServletResponse response) {
+        JFreeChart grafica = ChartFactory.createPieChart3D("productos por categoria", getGraficaProductos(), true, true, Locale.getDefault());
+        String archivo = getServletConfig().getServletContext().getRealPath("/grafica.png");
+        try {
+            ChartUtils.saveChartAsPNG(new File(archivo), grafica, 600, 500);
+            RequestDispatcher rd = request.getRequestDispatcher("grafica.jsp");
+            rd.forward(request, response);
+        } catch (IOException | ServletException ex) {
+            Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private PieDataset getGraficaProductos() {
+        DefaultPieDataset pie3d = new DefaultPieDataset();
+        GraficaDAO gDAO= new GraficaDAO();
+        try {
+            List datos = gDAO.grafica();
+            for (int i = 0; i < datos.size(); i++) {
+                GraficaDTO dto = (GraficaDTO) datos.get(i);
+                pie3d.setValue(dto.getNombre(), dto.getCantidad());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pie3d;
+    }
+
+    private void verPDF(HttpServletRequest request, HttpServletResponse response) {
+       CategoriaDAO dao = new CategoriaDAO();
+        try {
+            ServletOutputStream sos = response.getOutputStream();
+            File reporte = new File(getServletConfig().getServletContext().getRealPath("/reportes/ProductosPorCategoria.jasper"));
+            byte[]bytes = JasperRunManager.runReportToPdf(reporte.getPath(),null,dao.obtenerConexion());
+            response.setContentType("application/pdf");
+            response.setContentLength(bytes.length);
+            sos.write(bytes, 0, bytes.length);
+            sos.flush();
+            sos.close();
+            
+        } catch (IOException | JRException ex) {
             Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
