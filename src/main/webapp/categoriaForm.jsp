@@ -19,8 +19,8 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <!-- Image and text -->
                 <nav class="navbar navbar-light bg-light">
-                    <a class="navbar-brand" href="#">
-                        <img src="/docs/4.5/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+                    <a class="navbar-brand" href="index.jsp">
+                        <img src="imagenes/imagen.jpg" width="40" height="40" class="d-inline-block align-top" alt="" loading="lazy">
                         Proyecto base MVC
                     </a>
                 </nav>
@@ -49,7 +49,7 @@
                            value="<c:out value="${dto.entidad.idCategoria}"/>"/>
                     <div class="form-group row">
                         <div class="col-sm-6">
-                            <label class="col-sm-2 col-form-label">Nombre</label>
+                            <label class="col-sm-2 col-form-label col-form-label-lg">Nombre</label>
                         </div>
                         <div class="col-sm-6">
                             <input type="text" name="txtNombre" id="txtNombre"
@@ -61,7 +61,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6">
-                            <label class="col-sm-2 col-form-label">Descripcion categoria</label>
+                            <label class="col-sm-6 col-form-label col-form-label-lg">Descripcion categoria</label>
                         </div>
                         <div class="col-sm-6">
                             <input type="text" name="txtDescripcion" id="txtDescripcion"

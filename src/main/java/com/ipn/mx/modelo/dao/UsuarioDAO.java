@@ -8,6 +8,7 @@ package com.ipn.mx.modelo.dao;
 import com.ipn.mx.modelo.dto.UsuarioDTO;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,26 +26,40 @@ import javax.sql.DataSource;
  */
 public class UsuarioDAO {
 
-    private static final String SQL_INSERT = "{call spInsertarUsuario(?,?,?,?,?,?,?)}";
-    private static final String SQL_UPDATE = "{call spActualizarUsuario(?,?,?,?,?,?,?)}";
-    private static final String SQL_DELETE = "{call spBorrarUsuario(?)}";
-    private static final String SQL_SELECT = "{call spVerUsuario(?)}";
-    private static final String SQL_SELECT_ALL = "{call spSeleccionarUsuario()}";
+    private static final String SQL_INSERT = "insert into Usuario (nombre,paterno,materno,email,nombreUsuario,claveUsuario,tipoUsuario) values (?,?,?,?,?,?,?)";
+    private static final String SQL_UPDATE = "update Usuario set nombre=?,paterno=?,materno=?,email=?,nombreUsuario=?,claveUsuario=?,tipoUsuario=? where idUsuario=?";
+    private static final String SQL_DELETE = "delete from Usuario where idUsuario=?";
+    private static final String SQL_SELECT = "select * from Usuario where idUsuario=?";
+    private static final String SQL_SELECT_ALL = "select * from Usuario";
     private static String SQL_FIND_BY_USERNAME_AND_PASSWORD = "{call spLogin(?,?)}";
     private Connection con;
 
-    private void obtenerConexion() {
-        Context ic;
-        Context ec;
-        String recursoDataSource = "jdbc/3cm9";
+   /*private void obtenerConexion() {
+        String user = "kbiglixkqrjdwv";
+        String pwd = "befb1ba10456ace47cb2f81582fbfc69549c989687f745df1b62daea3b8eb306"; //password
+        String url = "jdbc:postgresql://ec2-3-218-123-191.compute-1.amazonaws.com:5432/dctvr0eudp9en0?sslmode=require";
+        String driver = "org.postgresql.Driver";
+
         try {
-            ic = new InitialContext();
-            ec = (Context) ic.lookup("java:comp/env");
-            DataSource ds = (DataSource) ec.lookup(recursoDataSource);
-            con = ds.getConnection();
-        } catch (NamingException | SQLException ex) {
+            Class.forName(driver);
+            con = DriverManager.getConnection(url, user, pwd);
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }*/
+    public Connection obtenerConexion() {
+        String user = "postgres";
+        String pwd = "root"; //password
+        String url = "jdbc:postgresql://localhost:5432/3CM9";
+        String driverMySql = "org.postgresql.Driver";
+
+        try {
+            Class.forName(driverMySql);
+            con = DriverManager.getConnection(url, user, pwd);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return con;
     }
 
     public void create(UsuarioDTO dto) throws SQLException {
@@ -151,6 +166,9 @@ public class UsuarioDAO {
                 return null;
             }
         } finally {
+            if(rs!=null){
+                  rs.close();
+              }
             if (cs != null) {
                 cs.close();
             }
@@ -164,20 +182,23 @@ public class UsuarioDAO {
         List resultados = new ArrayList();
         while (rs.next()) {
             UsuarioDTO dto = new UsuarioDTO();
-            dto.getEntidad().setIdUsuario(rs.getLong("idUsuario"));
+            dto.getEntidad().setIdUsuario(rs.getInt("idUsuario"));
+            
             dto.getEntidad().setNombre(rs.getString("nombre"));
             dto.getEntidad().setPaterno(rs.getString("paterno"));
             dto.getEntidad().setMaterno(rs.getString("materno"));
             dto.getEntidad().setEmail(rs.getString("email"));
             dto.getEntidad().setNombreUsuario(rs.getString("nombreUsuario"));
+            dto.getEntidad().setClaveUsuario(rs.getString("claveUsuario"));
             dto.getEntidad().setTipoUsuario(rs.getString("tipoUsuario"));//este cambiarlo
+            resultados.add(dto);
         }
         return resultados;
     }
 
     public static void main(String[] args) {
         UsuarioDTO dto = new UsuarioDTO();
-        dto.getEntidad().setIdUsuario(1L);
+        dto.getEntidad().setIdUsuario(1);
         dto.getEntidad().setNombre("Bruno");
         dto.getEntidad().setPaterno("Diaz");
         dto.getEntidad().setMaterno("Batman");

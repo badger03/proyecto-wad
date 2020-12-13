@@ -9,6 +9,7 @@ import com.ipn.mx.modelo.dao.CategoriaDAO;
 import com.ipn.mx.modelo.dao.GraficaDAO;
 import com.ipn.mx.modelo.dto.CategoriaDTO;
 import com.ipn.mx.modelo.dto.GraficaDTO;
+import com.ipn.mx.utilerias.EnviarMail;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -150,10 +151,16 @@ public class CategoriaServlet extends HttpServlet {
     private void eliminarCategoria(HttpServletRequest request, HttpServletResponse response) {
        CategoriaDAO dao = new CategoriaDAO();
        CategoriaDTO dto = new CategoriaDTO();
+       EnviarMail email=new EnviarMail();
+        String destinatario="kevyn.proyectowad@gmail.com";
+        String asunto,mensaje;
        dto.getEntidad().setIdCategoria(Integer.parseInt(request.getParameter("id")));
        
         try {
             dao.delete(dto);
+            asunto="Categoria eliminada";
+                mensaje="Se elimino la categoria satisfactoriamente :D";
+                email.enviarCorreo(destinatario, asunto, mensaje);
             listaDeCategorias(request,response);
         } catch (SQLException ex) {
             Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -177,7 +184,9 @@ public class CategoriaServlet extends HttpServlet {
     private void almacenarCategoria(HttpServletRequest request, HttpServletResponse response) {
        CategoriaDAO dao = new CategoriaDAO();
         CategoriaDTO dto = new CategoriaDTO();
-
+        EnviarMail email=new EnviarMail();
+        String destinatario="kevyn.proyectowad@gmail.com";
+        String asunto,mensaje;
         // Atributos en común
         dto.getEntidad().setNombreCategoria(request.getParameter("txtNombre"));
         dto.getEntidad().setDescripcionCategoria(request.getParameter("txtDescripcion"));
@@ -185,10 +194,16 @@ public class CategoriaServlet extends HttpServlet {
         try {
             if (request.getParameter("id") == null || request.getParameter("id").isEmpty()) { // Nuevo elemento
                 dao.create(dto);
+                asunto="Registro de categoria";
+                mensaje="Se registro la nueva categoria satisfactoriamente :D";
+                email.enviarCorreo(destinatario, asunto, mensaje);
                 listaDeCategorias(request, response);
             } else { // actualizacion
                 dto.getEntidad().setIdCategoria(Integer.parseInt(request.getParameter("id")));
                 dao.update(dto);
+                asunto="Actualizacion de categoria";
+                mensaje="Se actualizo la categoria satisfactoriamente :D";
+                email.enviarCorreo(destinatario, asunto, mensaje);
                 listaDeCategorias(request, response);
             }
         } catch (SQLException ex) {

@@ -19,8 +19,8 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <!-- Image and text -->
                 <nav class="navbar navbar-light bg-light">
-                    <a class="navbar-brand" href="#">
-                        <img src="/docs/4.5/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+                    <a class="navbar-brand" href="index.jsp">
+                        <img src="imagenes/imagen.jpg" width="40" height="40" class="d-inline-block align-top" alt="" loading="lazy">
                        Proyecto base MVC
                     </a>
                 </nav>
@@ -42,12 +42,12 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
-                        <li class="list-group-item"><c:out value="${cat.entidad.idProducto}"/></li>
-                        <li class="list-group-item"><c:out value="${cat.entidad.nombreProducto}"/></li>
-                        <li class="list-group-item"><c:out value="${cat.entidad.descripcionProducto}"/></li>
-                        <li class="list-group-item"><c:out value="${cat.entidad.precio}"/></li>
-                        <li class="list-group-item"><c:out value="${cat.entidad.existencia}"/></li>
-                        <li class="list-group-item"><c:out value="${cat.entidad.idCategoria}"/></li>
+                        <li class="list-group-item"><c:out value="Clave del producto: ${cat.entidad.idProducto}"/></li>
+                        <li class="list-group-item"><c:out value="Nombre del producto: ${cat.entidad.nombreProducto}"/></li>
+                        <li class="list-group-item"><c:out value="Descripcion del producto: ${cat.entidad.descripcionProducto}"/></li>
+                        <li class="list-group-item"><c:out value="Precio del producto: ${cat.entidad.precio}"/></li>
+                        <li class="list-group-item"><c:out value="Existencia del producto: ${cat.entidad.existencia}"/></li>
+                        <li class="list-group-item"><c:out value="Clave de la categoria: ${cat.entidad.idCategoria}"/></li>
                         
                     </ul>
                 </div>

@@ -19,8 +19,8 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <!-- Image and text -->
                 <nav class="navbar navbar-light bg-light">
-                    <a class="navbar-brand" href="#">
-                        <img src="/docs/4.5/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+                    <a class="navbar-brand" href="index.jsp">
+                        <img src="imagenes/imagen.jpg" width="40" height="40" class="d-inline-block align-top" alt="" loading="lazy">
                        Proyecto base MVC
                     </a>
                 </nav>
@@ -30,7 +30,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link active" href="index.jsp">Home <span class="sr-only">(current)</span></a>
                         <a class="nav-link" href="CategoriaServlet?accion=listaDeCategorias">Lista de categorias</a>
 
                     </div>
@@ -42,9 +42,9 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
-                        <li class="list-group-item"><c:out value="${cat.entidad.idCategoria}"/></li>
-                        <li class="list-group-item"><c:out value="${cat.entidad.nombreCategoria}"/></li>
-                        <li class="list-group-item"><c:out value="${cat.entidad.descripcionCategoria}"/></li>
+                        <li class="list-group-item"><c:out value="Clave de la categoria: ${cat.entidad.idCategoria}"/></li>
+                        <li class="list-group-item"><c:out value="Nombre de la categoria: ${cat.entidad.nombreCategoria}"/></li>
+                        <li class="list-group-item"><c:out value="Descripcion de la categoria: ${cat.entidad.descripcionCategoria}"/></li>
                         
                     </ul>
                 </div>

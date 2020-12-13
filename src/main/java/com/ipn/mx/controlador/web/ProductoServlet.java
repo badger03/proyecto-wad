@@ -7,6 +7,7 @@ package com.ipn.mx.controlador.web;
 
 import com.ipn.mx.modelo.dao.ProductoDAO;
 import com.ipn.mx.modelo.dto.ProductoDTO;
+import com.ipn.mx.utilerias.EnviarMail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -130,9 +131,15 @@ public class ProductoServlet extends HttpServlet {
     private void eliminarProducto(HttpServletRequest request, HttpServletResponse response) {
         ProductoDAO dao = new ProductoDAO();
         ProductoDTO dto = new ProductoDTO();
+        EnviarMail email=new EnviarMail();
+        String destinatario="kevyn.proyectowad@gmail.com";
+        String asunto,mensaje;
         dto.getEntidad().setIdProducto(Integer.parseInt(request.getParameter("id")));
         try {
             dao.delete(dto);
+            asunto="Producto eliminado";
+                mensaje="Se elimino el producto satisfactoriamente :D";
+                email.enviarCorreo(destinatario, asunto, mensaje);
             listaDeProductos(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(ProductoServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -158,7 +165,9 @@ public class ProductoServlet extends HttpServlet {
     private void almacenarProducto(HttpServletRequest request, HttpServletResponse response) {
         ProductoDAO dao = new ProductoDAO();
         ProductoDTO dto = new ProductoDTO();
-
+        EnviarMail email=new EnviarMail();
+        String destinatario="kevyn.proyectowad@gmail.com";
+        String asunto,mensaje;
         dto.getEntidad().setNombreProducto(request.getParameter("txtNombre"));
         dto.getEntidad().setDescripcionProducto(request.getParameter("txtDescripcion"));
         dto.getEntidad().setPrecio(Float.parseFloat(request.getParameter("txtPrecio")));
@@ -168,10 +177,16 @@ public class ProductoServlet extends HttpServlet {
         try {
             if (request.getParameter("id") == null || request.getParameter("id").isEmpty()) {
                 dao.create(dto);
+                asunto="Registro de producto";
+                mensaje="Se registro el nuevo producto satisfactoriamente :D";
+                email.enviarCorreo(destinatario, asunto, mensaje);
                 listaDeProductos(request, response);
             } else {
                 dto.getEntidad().setIdProducto(Integer.parseInt(request.getParameter("id")));
                 dao.update(dto);
+                asunto="Actualizacion de producto";
+                mensaje="Se actualizo el producto satisfactoriamente :D";
+                email.enviarCorreo(destinatario, asunto, mensaje);
                 listaDeProductos(request, response);
             }
         } catch (SQLException ex) {

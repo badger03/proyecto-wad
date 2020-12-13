@@ -28,7 +28,7 @@ public class EnviarMail {
             p.setProperty("mail.smtp.host", "smtp.gmail.com");
             p.setProperty("mail.smtp.starttls.enable", "true");
             p.setProperty("mail.smtp.port", "587");
-            p.setProperty("mail.smtp.user", "correo@gmail.com");//correo
+            p.setProperty("mail.smtp.user", "kevyn.proyectowad@gmail.com");//correo
             p.setProperty("mail.smtp.auth", "true");
             
             //crear la sesion
@@ -39,7 +39,7 @@ public class EnviarMail {
             m.setSubject(asunto);
             m.setText(mensaje);
             Transport t = session.getTransport("smtp");
-            t.connect(p.getProperty("mail.smtp.user"),"contrasenadelcorreo");//contra
+            t.connect(p.getProperty("mail.smtp.user"),"contrasena123");//contra
             t.sendMessage(m, m.getAllRecipients());
             t.close();
         } catch (AddressException ex) {
