@@ -27,7 +27,7 @@ public class ProductoDAO {
     private static final String SQL_SELECT = "select * from Producto where idProducto=?";
     private static final String SQL_SELECT_ALL = "select * from Producto";
     private Connection con;
-     public Connection obtenerConexion() {
+     /*public Connection obtenerConexion() {
         String user = "postgres";
         String pwd = "root"; //password
         String url = "jdbc:postgresql://localhost:5432/3CM9";
@@ -35,6 +35,20 @@ public class ProductoDAO {
 
         try {
             Class.forName(driverMySql);
+            con = DriverManager.getConnection(url, user, pwd);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return con;
+    }*/
+      public Connection obtenerConexion() {
+        String user = "kbiglixkqrjdwv";
+        String pwd = "befb1ba10456ace47cb2f81582fbfc69549c989687f745df1b62daea3b8eb306"; //password
+        String url = "jdbc:postgresql://ec2-3-218-123-191.compute-1.amazonaws.com:5432/dctvr0eudp9en0?sslmode=require";
+        String driver = "org.postgresql.Driver";
+
+        try {
+            Class.forName(driver);
             con = DriverManager.getConnection(url, user, pwd);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
