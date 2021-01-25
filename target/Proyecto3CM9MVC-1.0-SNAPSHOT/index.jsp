@@ -1,64 +1,91 @@
 <%-- 
     Document   : index
-    Created on : Nov 20, 2020, 10:47:01 AM
+    Created on : Jan 24, 2021, 9:19:10 PM
     Author     : kevyn
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html class="no-js" lang="es">
+
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Principal</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="estilos.css">
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Inicio de Sesión</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/css/themify-icons.css">
+        <link rel="stylesheet" href="assets/css/metisMenu.css">
+        <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="assets/css/slicknav.min.css">
+        <!-- amchart css -->
+        <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+        <!-- others css -->
+        <link rel="stylesheet" href="assets/css/typography.css">
+        <link rel="stylesheet" href="assets/css/default-css.css">
+        <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="stylesheet" href="assets/css/responsive.css">
+        <!-- modernizr css -->
+        <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
+
     <body>
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <!-- Image and text -->
-                <nav class="navbar navbar-light bg-light">
-                    <a class="navbar-brand" href="index.jsp">
-                        <img src="imagenes/imagen.jpg" width="40" height="40" class="d-inline-block align-top" alt="" loading="lazy">
-                        Proyecto base MVC
-                    </a>
-                </nav>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-link active" href="index.jsp">Home <span class="sr-only">(current)</span></a>
-                        <a class="nav-link" href="CategoriaServlet?accion=listaDeCategorias">Lista de categorias</a>
-                        <a class="nav-link" href="ProductoServlet?accion=listaDeProductos">Lista de productos</a>
-                        <a class="nav-link" href="UsuarioServlet?accion=listaDeUsuarios">Lista de Usuarios</a>
-                        <a class="nav-link" href="CategoriaServlet?accion=verPDF" target="_blank">Reporte</a>
-                        <a class="nav-link" href="CategoriaServlet?accion=graficar" target="_blank">Grafica</a>
-                        <a class="nav-link" >Sesion: admin</a>
-                    </div>
-                </div>
-            </nav>
-            <br><br><br><br><br><br><br>
-            <div class="card mb-3" >
-                <div class="row no-gutters">
-                    <div class="col-md-5">
-                        <img src="imagenes/imagen.jpg" class="card-img" alt=""width="450" height="450">
-                    </div>
-                    <div class="col-md-7">
-                        <div class="card-body">
-                            <h1 class="card-title">Gestion de las categorias de los productos existentes</h1>
-                            <br>
-                            <p class="card-text">-Esta aplicacion web nos permite gestionar las categorias de los productos existentes en una tienda, los productos y los usuarios.</p>
-                            <p class="card-text">-Se utilizaron los patrones de diseño DTO, DAO y MVC.</p>
-                            <p class="card-text">-Se utilizo para la web GUI el framework bootstrap.</p>
-                            <p class="card-text">-Se diseño una base de datos que nos permite gestionar las categorias, los productos y los usuarios</p>
+        <!--[if lt IE 8]>
+                <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+            <![endif]-->
+        <!-- preloader area start -->
+        <div id="preloader">
+            <div class="loader"></div>
+        </div>
+        <!-- preloader area end -->
+        <!-- login area start -->
+        <div class="login-area">
+            <div class="container">
+                <div class="login-box ptb--100">
+                    <form action="SesionServlet" method="post">
+                        <div class="login-form-head">
+                            <h4>Sign In</h4>
+                            <p>Hola!, Inicia Sesión</p>
                         </div>
-                    </div>
+                        <div class="login-form-body">
+                            <div class="form-gp">
+                                <label for="txtNombreUsuario">Usuario</label>
+                                <input type="text" id="txtNombreUsuario" name="txtNombreUsuario">
+                                <i class="ti-email"></i>
+                            </div>
+                            <div class="form-gp">
+                                <label for="txtClaveUsuario">Password</label>
+                                <input type="password" id="txtClaveUsuario" name="txtClaveUsuario">
+                                <i class="ti-lock"></i>
+                            </div>
+                            <div class="submit-btn-area">
+                                <button id="form_submit" type="submit">INGRESAR<i class="ti-arrow-right"></i></button>
+                            </div>
+                            <div class="form-footer text-center mt-5">
+                                
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" ></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+        <!-- login area end -->
+
+        <!-- jquery latest version -->
+        <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
+        <!-- bootstrap 4 js -->
+        <script src="assets/js/popper.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/owl.carousel.min.js"></script>
+        <script src="assets/js/metisMenu.min.js"></script>
+        <script src="assets/js/jquery.slimscroll.min.js"></script>
+        <script src="assets/js/jquery.slicknav.min.js"></script>
+
+        <!-- others plugins -->
+        <script src="assets/js/plugins.js"></script>
+        <script src="assets/js/scripts.js"></script>
     </body>
+
 </html>

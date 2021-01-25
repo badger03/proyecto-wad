@@ -1,6 +1,7 @@
 com\ipn\mx\controlador\web\UsuarioServlet.class
 com\ipn\mx\modelo\entidades\Usuario.class
 com\ipn\mx\utilerias\EnviarMail.class
+com\ipn\mx\controlador\web\MenuServlet.class
 com\ipn\mx\modelo\dao\GraficaDAO.class
 com\ipn\mx\modelo\dao\UsuarioDAO.class
 com\ipn\mx\modelo\dto\CategoriaDTO.class
@@ -10,6 +11,8 @@ com\ipn\mx\modelo\dto\UsuarioDTO.class
 com\ipn\mx\modelo\entidades\Categoria.class
 com\ipn\mx\modelo\entidades\Producto.class
 com\ipn\mx\controlador\web\CategoriaServlet.class
+com\ipn\mx\controlador\web\SesionServlet.class
 com\ipn\mx\modelo\dao\CategoriaDAO.class
 com\ipn\mx\modelo\dto\ProductoDTO.class
+com\ipn\mx\controlador\web\CerrarSesionServlet.class
 com\ipn\mx\controlador\web\ProductoServlet.class

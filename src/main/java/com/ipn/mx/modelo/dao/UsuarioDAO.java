@@ -32,6 +32,8 @@ public class UsuarioDAO {
     private static final String SQL_SELECT = "select * from Usuario where idUsuario=?";
     private static final String SQL_SELECT_ALL = "select * from Usuario";
     private static String SQL_FIND_BY_USERNAME_AND_PASSWORD = "{call spLogin(?,?)}";
+    private static final String SQL_READ_USUARIO = "SELECT * FROM Usuario WHERE nombreUsuario = ? AND claveUsuario = ?";
+     int contador = 0;
     private Connection con;
 
    /*private void obtenerConexion() {
@@ -183,6 +185,42 @@ public class UsuarioDAO {
             if(rs!=null){
                   rs.close();
               }
+            if (cs != null) {
+                cs.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+     public int readUsuario(UsuarioDTO dto) throws SQLException {
+        obtenerConexion();
+        CallableStatement cs = null;
+        ResultSet rs = null;
+        try {
+            cs = con.prepareCall(SQL_READ_USUARIO);
+            cs.setString(1, dto.getEntidad().getNombreUsuario());
+            cs.setString(2, dto.getEntidad().getClaveUsuario());
+            rs = cs.executeQuery();
+
+            while (rs.next()) {
+                contador = contador + 1;
+                dto.getEntidad().setNombreUsuario(rs.getString("nombreUsuario"));
+                dto.getEntidad().setClaveUsuario(rs.getString("claveUsuario"));
+            }
+            if (contador == 1) {
+                
+                return 1;
+                
+            } else {
+                
+                return 0;
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
             if (cs != null) {
                 cs.close();
             }

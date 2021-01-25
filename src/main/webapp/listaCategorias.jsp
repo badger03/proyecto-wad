@@ -19,9 +19,9 @@
              <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <!-- Image and text -->
                 <nav class="navbar navbar-light bg-light">
-                    <a class="navbar-brand" href="index.jsp">
+                    <a class="navbar-brand" href="principal.jsp">
                         <img src="imagenes/imagen.jpg" width="40" height="40" class="d-inline-block align-top" alt="" loading="lazy">
-                       Proyecto base MVC
+                       Mi almacén
                     </a>
                 </nav>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,9 +29,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link active" href="index.jsp">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link active" href="principal.jsp">Home <span class="sr-only">(current)</span></a>
                         <a class="nav-link" href="CategoriaServlet?accion=listaDeCategorias">Lista de categorias</a>
                         <a class="nav-link" href="CategoriaServlet?accion=nuevo">Registrar categoria</a>
+                        <a class="nav-link" href="CerrarSesionServlet">cerrar sesion</a>
                     </div>
                 </div>
             </nav>

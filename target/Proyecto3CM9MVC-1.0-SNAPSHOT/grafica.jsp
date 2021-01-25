@@ -9,11 +9,37 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>grafica</title>
+        <title>Principal</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="estilos.css">
     </head>
     <body>
-        <img src="grafica.png"/>
-        
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <!-- Image and text -->
+                <nav class="navbar navbar-light bg-light">
+                    <a class="navbar-brand" href="principal.jsp">
+                        <img src="imagenes/imagen.jpg" width="40" height="40" class="d-inline-block align-top" alt="" loading="lazy">
+                        Mi almacén
+                    </a>
+                </nav>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link active" href="principal.jsp">Home <span class="sr-only">(current)</span></a>
+                        
+                    </div>
+                </div>
+            </nav>
+            <br><br><br><br><br>
+            <div class="card text-center" style="width: 45rem;" >
+                <img src="grafica.png"/>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" ></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
     </body>
 </html>
